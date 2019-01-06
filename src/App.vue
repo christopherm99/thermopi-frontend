@@ -7,16 +7,24 @@
     </header>
     <main>
       <div class="target">
-        <button>+</button>
-        <p>{{ target }}</p>
-        <button>-</button>
+        <div>
+          <button v-on:click="increment"><i class="fas fa-plus"></i></button>
         </div>
+        <p>{{ target }}</p>
+        <div>
+          <button v-on:click="decrement"><i class="fas fa-minus"></i></button>
+        </div>
+      </div>
       <div class="average">
         <p>{{ average }}</p>
       </div>
       <div class="controls">
-        <button>Hold</button>
-        <button>Set</button>
+        <div>
+          <button>Hold</button>
+        </div>
+        <div>
+          <button>Set</button>
+        </div>
       </div>
     </main>
     <footer>
@@ -30,6 +38,8 @@
 <script>
 import axios from "axios";
 
+let server = "http://192.168.1.31:8080"; // Local testing server
+
 export default {
   name: "app",
   data() {
@@ -40,17 +50,39 @@ export default {
     };
   },
   mounted() {
-    axios.get("http://localhost:3000/sensors").then(response => {
-      this.sensors = response.data;
-      let tot = 0;
-      for (let i = 0; i < this.sensors.length; i++) {
-        tot += this.sensors[i].value;
-      }
-      this.average = Math.round(tot / this.sensors.length);
-    });
-    axios.get("http://localhost:3000/target").then(response => {
-      this.target = response.data.value;
-    });
+    this.refresh();
+    setInterval(this.refresh, 5000);
+  },
+  methods: {
+    refresh: function() {
+      axios.get(server + "/sensors").then(response => {
+        this.sensors = response.data;
+        let tot = 0;
+        for (let i = 0; i < this.sensors.length; i++) {
+          tot += this.sensors[i].value;
+        }
+        this.average = Math.round(tot / this.sensors.length);
+      });
+      axios.get(server + "/target").then(response => {
+        this.target = response.data.value;
+      });
+    },
+    increment: function() {
+      this.refresh();
+      axios.post(server + "/target", {
+        value: this.target + 1,
+        persistent: false
+      });
+      this.refresh();
+    },
+    decrement: function() {
+      this.refresh();
+      axios.post(server + "/target", {
+        value: this.target - 1,
+        persistent: false
+      });
+      this.refresh();
+    }
   }
 };
 </script>
@@ -90,44 +122,65 @@ body {
     grid-column: 1 / span 3;
     grid-template: subgrid;
     grid-auto-flow: column;
+    height: 400px;
     div {
       justify-self: center;
       align-self: center;
     }
     .target {
       grid-column: 1;
-      button {
+      div {
         display: block;
-        background-color: #005ecb;
-        border: none;
-        color: white;
-        padding: 5px 15px;
-        margin: 50px 0px;
-        font-size: 20pt;
-        box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.4);
-        border-radius: 50%;
+        text-align: center;
+        button {
+          display: inline-block;
+          background-color: #005ecb;
+          border: none;
+          color: white;
+          padding: 5px;
+          margin: 25px 0px;
+          font-size: 20pt;
+          box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.4);
+          border-radius: 50%;
+          width: 60px;
+          height: 60px;
+        }
+        button:active {
+          box-shadow: none;
+        }
+        button:focus {
+          outline: 0;
+        }
       }
       p {
         display: block;
         font-size: 72pt;
+        margin: 0px;
       }
     }
     .average {
       grid-column: 2;
       font-size: 128pt;
+      p {
+        margin: 50px 0px;
+      }
     }
     .controls {
       grid-column: 3;
-      button {
+      div {
         display: block;
-        background-color: #005ecb;
-        border: none;
-        color: white;
-        padding: 5px 15px;
-        margin: 50px 0px;
-        font-size: 20pt;
-        box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.4);
-        border-radius: 4px;
+        text-align: center;
+        button {
+          display: inline-block;
+          background-color: #005ecb;
+          border: none;
+          color: white;
+          padding: 5px 15px;
+          margin: 50px 0px;
+          font-size: 20pt;
+          box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.4);
+          border-radius: 4px;
+        }
       }
     }
   }
