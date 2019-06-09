@@ -3,9 +3,14 @@ module.exports = {
     "env": {
         "commonjs": true,
         "es6": true,
-        "node": true
+        "node": true,
+        "jest": true
     },
-    "extends": "eslint:recommended",
+    "extends": [
+        "eslint:recommended",
+        "prettier"
+    ],
+    "plugins": ["prettier"],
     "globals": {
         "Atomics": "readonly",
         "SharedArrayBuffer": "readonly"
@@ -29,6 +34,7 @@ module.exports = {
         "semi": [
             "error",
             "always"
-        ]
+        ],
+        "prettier/prettier": "error"
     }
 };
