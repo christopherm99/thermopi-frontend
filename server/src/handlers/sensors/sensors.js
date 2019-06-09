@@ -20,9 +20,11 @@ module.exports = {
     try {
       setTemperature(res.app, req.body.value, req.params.id);
     } catch (err) {
-      res.status(400).send(err.message);
+      err instanceof TypeError
+        ? res.status(400).send("Bad Request: " + err.message)
+        : res.status(500).send("Internal Server Error");
       return;
     }
-    res.status(202).send("Request received");
+    res.status(202).send("Accepted");
   }
 };

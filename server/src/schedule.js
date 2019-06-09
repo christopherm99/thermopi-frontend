@@ -24,23 +24,19 @@ function __get(time) {
   return timetable[time.day][time.hour];
 }
 
-function set(app, time, val, persist) {
+function set(app, val, persistent, time) {
   let err = isInvalidTime(time);
   if (err) {
     throw new TypeError(err);
   }
   if (typeof val !== "number") {
-    throw new TypeError(
-      `val must be type number, but received type ${typeof val}`
-    );
+    throw new TypeError(`value type ${typeof val}`);
   }
   if (typeof persist !== "boolean") {
-    throw new TypeError(
-      `persist must be type number, but received type ${typeof persist}`
-    );
+    throw new TypeError(`persistent type ${typeof persistent}`);
   }
   /* eslint-disable indent */
-  persist
+  persistent
     ? __set(
         app,
         time || {

@@ -47,7 +47,7 @@ describe("POST /target", () => {
     expect(res.status).toBeCalledWith(202);
     expect(res.send).toBeCalledWith("Accepted");
   });
-  it("Should respond with 400 (error setting target)", () => {
+  it("Should respond with 400 (malformed request)", () => {
     schedule.setTarget.mockImplementation(() => {
       throw new TypeError("sample error");
     });
@@ -57,4 +57,6 @@ describe("POST /target", () => {
     expect(res.status).toBeCalledWith(400);
     expect(res.send).toBeCalledWith("Bad Request: sample error");
   });
+
+  it.todo("Should respond with 500 (error setting target)");
 });
