@@ -16,11 +16,13 @@ app.use(bodyParser.json());
 app.use(express.static("public"));
 // Config
 app.locals = config;
-app.locals.timetableJob = initTimetableJob(app);
+initTimetableJob(app);
 app.locals.sensors = {};
 // Handlers
 app.get("/target", handlers.target.get);
 app.post("/target", handlers.target.post);
 
-// eslint-disable-next-line no-console
-app.listen(config.port, () => console.log(`App running at: http://localhost:${config.port}/\n`));
+app.listen(config.port, () =>
+  // eslint-disable-next-line no-console
+  console.log(`App running at: http://localhost:${config.port}/\n`)
+);

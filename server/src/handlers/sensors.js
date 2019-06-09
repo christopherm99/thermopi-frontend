@@ -4,7 +4,7 @@ module.exports = {
   get(req, res) {
     try {
       res.send(getTemperature(req.app, req.params.id));
-    } catch(err) {
+    } catch (err) {
       res.status(400).send(err.message);
       return;
     }
@@ -12,10 +12,10 @@ module.exports = {
   postID(req, res) {
     try {
       setTemperature(res.app, req.body.value, req.params.id);
-    } catch(err) {
+    } catch (err) {
       res.status(400).send(err.message);
       return;
     }
-    res.sendStatus(202);
+    res.status(202).send("Request received");
   }
 };

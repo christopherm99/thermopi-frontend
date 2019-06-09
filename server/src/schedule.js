@@ -1,18 +1,23 @@
 const jsonfile = require("jsonfile");
+const path = require("path");
 const { scheduleJob } = require("node-schedule");
 const { DateTime } = require("luxon");
 
-var timetable = jsonfile.readFileSync("../timetable.json");
+var timetable = jsonfile.readFileSync(
+  path.join(path.resolve(__dirname, ".."), "timetable.json")
+);
 
 function get(time) {
   let err = isInvalidTime(time);
   if (err) {
     throw new TypeError(err);
   }
-  return __get(time || {
-    day: DateTime.local().weekday,
-    hour: DateTime.local().hour
-  });
+  return __get(
+    time || {
+      day: DateTime.local().weekday,
+      hour: DateTime.local().hour
+    }
+  );
 }
 
 function __get(time) {
@@ -25,15 +30,27 @@ function set(app, time, val, persist) {
     throw new TypeError(err);
   }
   if (typeof val !== "number") {
-    throw new TypeError(`val must be type number, but received type ${typeof val}`);
+    throw new TypeError(
+      `val must be type number, but received type ${typeof val}`
+    );
   }
   if (typeof persist !== "boolean") {
-    throw new TypeError(`persist must be type number, but received type ${typeof persist}`);
+    throw new TypeError(
+      `persist must be type number, but received type ${typeof persist}`
+    );
   }
-  persist ? __set(app, time || {
-    day: DateTime.local().weekday,
-    hour: DateTime.local().hour
-  }, val) : __setTarget(app, val);
+  /* eslint-disable indent */
+  persist
+    ? __set(
+        app,
+        time || {
+          day: DateTime.local().weekday,
+          hour: DateTime.local().hour
+        },
+        val
+      )
+    : __setTarget(app, val);
+  /* eslint-enable */
 }
 
 function __set(app, time, val) {
@@ -49,10 +66,10 @@ function __setTarget(app, val) {
 function isInvalidTime(time) {
   if (time) {
     if (typeof time.weekday !== "number") {
-      return `time.weekday must be type number, but received type ${typeof time.weekday}`
+      return `time.weekday must be type number, but received type ${typeof time.weekday}`;
     }
     if (typeof time.hour !== "number") {
-      return `time.hour must be type number, but received type ${typeof time.hour}`
+      return `time.hour must be type number, but received type ${typeof time.hour}`;
     }
   }
   return false;

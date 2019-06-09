@@ -1,15 +1,19 @@
 function set(app, val, id) {
   if (typeof val !== "number") {
-    throw new TypeError(`val must be type number, but received type ${typeof val}`);
+    throw new TypeError(
+      `val must be type number, but received type ${typeof val}`
+    );
   }
   if (typeof id !== "string") {
-    throw new TypeError(`id must be type string, but received type ${typeof id}`);
+    throw new TypeError(
+      `id must be type string, but received type ${typeof id}`
+    );
   }
   app.locals.sensors[id] = val;
 }
 
 function __getAll(app) {
-  return Object.entries(app.locals.sensors).map((val) => ({
+  return Object.entries(app.locals.sensors).map(val => ({
     name: val[0],
     value: val[1]
   }));
@@ -17,7 +21,9 @@ function __getAll(app) {
 
 function __getID(app, id) {
   if (typeof id !== "string") {
-    throw new TypeError(`id must be type string, but received type ${typeof id}`);
+    throw new TypeError(
+      `id must be type string, but received type ${typeof id}`
+    );
   }
   return app.locals.sensors[id];
 }
