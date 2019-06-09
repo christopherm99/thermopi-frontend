@@ -2,10 +2,7 @@
 const target = require("./target");
 
 describe("GET /target", () => {
-  let locals = {};
-  beforeEach(() => {
-    locals = { target: 70 };
-  });
+  let locals = { target: 70 };
 
   it("Should respond with the current target temperature", () => {
     let req = mockRequest(locals);
