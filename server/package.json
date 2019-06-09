@@ -10,7 +10,7 @@
     "serve": "./node_modules/nodemon/bin/nodemon.js src/app.js",
     "lint": "eslint --ignore-path ../.gitignore . --fix",
     "pretest": "eslint --ignore-path ../.gitignore .",
-    "test": "jest"
+    "test": "jest --coverage --coverageReporters=text-lcov | coveralls"
   },
   "keywords": [],
   "author": "",
@@ -26,6 +26,7 @@
     "nodemon": "^1.19.1"
   },
   "devDependencies": {
+    "coveralls": "^3.0.4",
     "eslint": "^5.16.0",
     "eslint-config-prettier": "^4.3.0",
     "eslint-plugin-prettier": "^3.1.0",
