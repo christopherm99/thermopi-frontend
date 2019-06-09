@@ -58,5 +58,14 @@ describe("POST /target", () => {
     expect(res.send).toBeCalledWith("Bad Request: sample error");
   });
 
-  it.todo("Should respond with 500 (error setting target)");
+  it("Should respond with 500 (error setting target)", () => {
+    schedule.setTarget.mockImplementation(() => {
+      throw new Error("sample error");
+    });
+    let req = mockRequest();
+    let res = mockResponse();
+    target.post(req, res);
+    expect(res.status).toBeCalledWith(500);
+    expect(res.send).toBeCalledWith("Internal Server Error");
+  });
 });

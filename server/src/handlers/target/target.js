@@ -10,7 +10,9 @@ module.exports = {
     try {
       setTarget(res.app, req.body.value, req.body.persistent);
     } catch (err) {
-      res.status(400).send("Bad Request: " + err.message);
+      err instanceof TypeError
+        ? res.status(400).send("Bad Request: " + err.message)
+        : res.status(500).send("Internal Server Error");
       return;
     }
     res.status(202).send("Accepted");
