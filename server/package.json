@@ -10,7 +10,8 @@
     "serve": "./node_modules/nodemon/bin/nodemon.js src/app.js",
     "lint": "eslint --ignore-path ../.gitignore . --fix",
     "pretest": "eslint --ignore-path ../.gitignore .",
-    "test": "jest --coverage --coverageReporters=text-lcov | coveralls"
+    "test": "jest --coverage --coverageReporters=text-lcov | coveralls",
+    "test:local": "jest"
   },
   "keywords": [],
   "author": "",

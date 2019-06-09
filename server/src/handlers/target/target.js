@@ -4,15 +4,15 @@ module.exports = {
   get(req, res) {
     res.app.locals.target
       ? res.send(res.app.locals.target)
-      : res.status(500).send("Target temperature is unset");
+      : res.status(503).send("Service Unavailable: Target Unset");
   },
   post(req, res) {
     try {
-      setTarget(res.app, null, req.body.value, req.body.persistant);
+      setTarget(res.app, req.body.value, req.body.persistent);
     } catch (err) {
-      res.status(400).send(err.message);
+      res.status(400).send("Bad Request: " + err.message);
       return;
     }
-    res.sendStatus(202);
+    res.status(202).send("Accepted");
   }
 };
