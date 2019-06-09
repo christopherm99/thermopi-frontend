@@ -1,44 +1,44 @@
 <template>
   <div id="app">
-    <header>
-      <div>Other info...</div>
-      <div>ThermoPi</div>
-      <div>Date Time</div>
-    </header>
-    <main>
-      <div class="target">
+    <V-toolbar flat color="#1b3039" dark>
+      <v-toolbar-title>ThermoPi</v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-toolbar-title>{{ time | moment("dddd, MMMM Do YYYY, h:m a") }}</v-toolbar-title>
+    </v-toolbar>
+    <v-layout>
+      <v-flex class="target">
         <div>
-          <button v-on:click="increment"><i class="fas fa-plus"></i></button>
+          <v-btn v-on:click="increment"><i class="fas fa-plus"></i></v-btn>
         </div>
         <p>{{ target }}</p>
         <div>
-          <button v-on:click="decrement"><i class="fas fa-minus"></i></button>
+          <v-btn v-on:click="decrement"><i class="fas fa-minus"></i></v-btn>
         </div>
-      </div>
-      <div class="average">
+      </v-flex>
+      <v-flex class="average">
         <p>{{ average }}</p>
-      </div>
-      <div class="controls">
+      </v-flex>
+      <v-flex class="controls">
         <div>
-          <button>Hold</button>
+          <v-btn>Hold</v-btn>
         </div>
         <div>
-          <button>Set</button>
+          <v-btn>Set</v-btn>
         </div>
-      </div>
-    </main>
-    <footer>
-      <div v-for="sensor in sensors" v-bind:key="sensor.name">
+      </v-flex>
+    </v-layout>
+    <v-footer>
+      <v-flex v-for="sensor in sensors" v-bind:key="sensor.name">
         {{ sensor.name }}: {{ sensor.value }}°C
-      </div>
-    </footer>
+      </v-flex>
+    </v-footer>
   </div>
 </template>
 
 <script>
 import axios from "axios";
 
-let server = "http://192.168.1.31:8080"; // Local testing server
+let server = "http://localhost:8080"; // Local testing server
 
 export default {
   name: "app",
@@ -46,15 +46,20 @@ export default {
     return {
       sensors: [],
       target: 0,
-      average: 0
+      average: 0,
+      time: new Date()
     };
   },
   mounted() {
     this.refresh();
     setInterval(this.refresh, 5000);
+    setInterval(this.refreshTime, 30000)
   },
   methods: {
-    refresh: function() {
+    refreshTime() {
+      this.time = new Date()
+    },
+    refresh() {
       axios.get(server + "/sensors").then(response => {
         this.sensors = response.data;
         let tot = 0;
@@ -67,7 +72,7 @@ export default {
         this.target = response.data.value;
       });
     },
-    increment: function() {
+    increment() {
       this.refresh();
       axios.post(server + "/target", {
         value: this.target + 1,
@@ -75,7 +80,7 @@ export default {
       });
       this.refresh();
     },
-    decrement: function() {
+    decrement() {
       this.refresh();
       axios.post(server + "/target", {
         value: this.target - 1,
@@ -88,6 +93,7 @@ export default {
 </script>
 
 <style lang="scss">
+/*
 html,
 body {
   height: 100%;
@@ -199,4 +205,5 @@ body {
     }
   }
 }
+*/
 </style>
