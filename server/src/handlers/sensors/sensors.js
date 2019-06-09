@@ -1,4 +1,4 @@
-const { getTemperature, setTemperature } = require("../temperature");
+const { getTemperature, setTemperature } = require("../../temperature");
 
 module.exports = {
   get(req, res) {

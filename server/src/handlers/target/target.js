@@ -1,4 +1,4 @@
-const { setTarget } = require("../schedule");
+const { setTarget } = require("../../schedule");
 
 module.exports = {
   get(req, res) {

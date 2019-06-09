@@ -1,4 +1,4 @@
 module.exports = {
-  target: require("./target"),
-  sensors: require("./sensors")
+  target: require("./target/target"),
+  sensors: require("./sensors/sensors")
 };
