@@ -13,7 +13,10 @@ module.exports = {
     "plugins": ["prettier"],
     "globals": {
         "Atomics": "readonly",
-        "SharedArrayBuffer": "readonly"
+        "SharedArrayBuffer": "readonly",
+        "mockApp": "readonly",
+        "mockRequest": "readonly",
+        "mockResponse": "readonly"
     },
     "parserOptions": {
         "ecmaVersion": 2018

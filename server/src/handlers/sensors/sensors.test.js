@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 jest.mock("../../temperature");
 const temperature = require("../../temperature");
 const sensors = require("./sensors");

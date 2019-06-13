@@ -1,8 +1,11 @@
+global.mockApp = locals => {
+  return { locals };
+};
+
 global.mockRequest = (locals, body, params) => {
   body = body ? body : {};
   params = params ? params : {};
-  const req = { app: {}, body, params };
-  req.app.locals = { ...locals };
+  const req = { app: mockApp(locals), body, params };
   return req;
 };
 

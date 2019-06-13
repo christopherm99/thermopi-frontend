@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 jest.mock("../../schedule");
 const schedule = require("../../schedule");
 const target = require("./target");
