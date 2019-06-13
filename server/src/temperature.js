@@ -1,6 +1,6 @@
 function set(app, val, id) {
   if (typeof val !== "number") {
-    throw new TypeError(`val type ${typeof val}`);
+    throw new TypeError(`value type ${typeof val}`);
   }
   if (typeof id !== "string") {
     throw new TypeError(`id type ${typeof id}`);
@@ -9,10 +9,12 @@ function set(app, val, id) {
 }
 
 function __getAll(app) {
-  return Object.entries(app.locals.sensors).map(val => ({
-    name: val[0],
-    value: val[1]
-  }));
+  return Object.entries(app.locals.sensors)
+    .map(val => ({
+      name: val[0],
+      value: val[1]
+    }))
+    .sort((a, b) => (a.name < b.name ? -1 : 1));
 }
 
 function __getID(app, id) {
