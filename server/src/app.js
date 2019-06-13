@@ -1,7 +1,7 @@
 const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
-var bodyParser = require("body-parser");
+const bodyParser = require("body-parser");
 
 const config = require("../config.json");
 const morganFormat = require("./morgan");
