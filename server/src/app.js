@@ -3,7 +3,7 @@ const morgan = require("morgan");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 
-const config = require("../config.json");
+const config = require("./config");
 const morganFormat = require("./morgan");
 const handlers = require("./handlers/index");
 const { initTimetableJob } = require("./schedule");
