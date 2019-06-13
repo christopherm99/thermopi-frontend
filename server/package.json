@@ -1,7 +1,7 @@
 {
-  "name": "server",
+  "name": "thermopi-server",
   "version": "1.0.0",
-  "description": "",
+  "description": "thermopi-server is the nodejs backend to host the thermopi Vue.js frontend and manage the thermostat logic",
   "main": "index.js",
   "scripts": {
     "build": "./build.sh",
@@ -13,9 +13,8 @@
     "test": "jest --coverage --coverageReporters=text-lcov | coveralls",
     "test:local": "jest"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Christopher Milan",
+  "license": "CC-BY-4.0",
   "dependencies": {
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",

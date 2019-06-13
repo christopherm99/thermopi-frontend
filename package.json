@@ -1,7 +1,10 @@
 {
-  "name": "Thermopi-Frontend",
+  "name": "thermopi",
   "version": "0.1.0",
+  "description": "thermopi is attempt to make a simplistic JavaScript powered thermostat to run on a raspberry pi",
   "private": true,
+  "license": "CC-BY-4.0",
+  "author": "Christopher Milan",
   "scripts": {
     "serve": "vue-cli-service serve --fix",
     "build": "vue-cli-service build",
