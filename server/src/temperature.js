@@ -8,6 +8,13 @@ function set(app, val, id) {
   app.locals.sensors[id] = val;
 }
 
+function getAvg(app) {
+  let temps = Object.values(app.locals.sensors);
+  let sum = 0;
+  temps.forEach(t => (sum += t));
+  return sum / temps.length;
+}
+
 function __getAll(app) {
   return Object.entries(app.locals.sensors)
     .map(val => ({
@@ -27,5 +34,6 @@ module.exports = {
   setTemperature: set,
   getTemperature(app, id) {
     return id ? __getID(app, id) : __getAll(app);
-  }
+  },
+  getAverageTemperature: getAvg
 };

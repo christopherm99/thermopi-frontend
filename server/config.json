@@ -1,5 +1,5 @@
 {
-  "compPin": 0,
-  "fanPin": 0,
+  "compPin": 17,
+  "fanPin": 27,
   "port": 8080
 }
