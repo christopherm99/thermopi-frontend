@@ -1,37 +1,79 @@
 <template>
   <div id="app">
-    <V-toolbar flat color="#1b3039" dark>
-      <v-toolbar-title>ThermoPi</v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-toolbar-title>{{ time | moment("dddd, MMMM Do YYYY, h:m a") }}</v-toolbar-title>
-    </v-toolbar>
-    <v-layout>
-      <v-flex class="target">
-        <div>
-          <v-btn v-on:click="increment"><i class="fas fa-plus"></i></v-btn>
+    <nav class="navbar is-primary">
+      <div class="navbar-brand">
+        <div class="navbar-item">
+          <h1 class="title has-text-light">
+            thermopi
+          </h1>
         </div>
-        <p>{{ target }}</p>
-        <div>
-          <v-btn v-on:click="decrement"><i class="fas fa-minus"></i></v-btn>
+      </div>
+      <div class="navbar-end">
+        <div class="navbar-item">
+          <h2 class="subtitle has-text-light">
+            {{ time | moment("h:mm a") }}
+          </h2>
         </div>
-      </v-flex>
-      <v-flex class="average">
-        <p>{{ average }}</p>
-      </v-flex>
-      <v-flex class="controls">
-        <div>
-          <v-btn>Hold</v-btn>
+      </div>
+    </nav>
+    <div class="columns" style="margin: 10px;">
+      <div class="column">
+        <div class="box">
+          <p class="subtitle">
+            Target Temperature
+          </p>
+          <div class="center" style="margin: 8vh 0;">
+            <b-button
+              v-on:click="decrement"
+              icon-right="minus"
+              class="is-inline-block is-size-5"
+            />
+            <p class="is-inline-block is-size-4" style="padding: 6.5px 10px">
+              {{ target }}
+            </p>
+            <b-button
+              v-on:click="increment"
+              icon-right="plus"
+              class="is-inline-block is-size-5"
+            />
+          </div>
         </div>
-        <div>
-          <v-btn>Set</v-btn>
+      </div>
+      <div class="column is-primary">
+        <div class="box">
+          <h2 class="subtitle">
+            Current Temperature
+          </h2>
+          <div class="center" style="margin: 5vh 0;">
+            <p class="is-size-1">{{ average }}</p>
+          </div>
         </div>
-      </v-flex>
-    </v-layout>
-    <v-footer>
-      <v-flex v-for="sensor in sensors" v-bind:key="sensor.name">
-        {{ sensor.name }}: {{ sensor.value }}°C
-      </v-flex>
-    </v-footer>
+      </div>
+      <div class="column">
+        <div class="box">
+          <h2 class="subtitle">
+            Settings
+          </h2>
+          <div class="center" style="margin: 9vh 0;">
+            <b-button class="is-size-6">Hold</b-button>
+            <b-button class="is-size-6">Set</b-button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer>
+      <h2 class="subtitle">Sensor Readings</h2>
+      <nav class="level">
+        <div
+          class="level-item has-text-centered"
+          :class="`has-background-${sensor.name}`"
+          v-for="sensor in sensors"
+          v-bind:key="sensor.name"
+        >
+          {{ sensor.value }} °F
+        </div>
+      </nav>
+    </footer>
   </div>
 </template>
 
@@ -53,11 +95,11 @@ export default {
   mounted() {
     this.refresh();
     setInterval(this.refresh, 5000);
-    setInterval(this.refreshTime, 30000)
+    setInterval(this.refreshTime, 30000);
   },
   methods: {
     refreshTime() {
-      this.time = new Date()
+      this.time = new Date();
     },
     refresh() {
       axios.get(server + "/sensors").then(response => {
@@ -73,137 +115,41 @@ export default {
       });
     },
     increment() {
-      this.refresh();
+      this.target++;
       axios.post(server + "/target", {
-        value: this.target + 1,
+        value: this.target,
         persistent: false
       });
-      this.refresh();
+      // this.refresh();
     },
     decrement() {
-      this.refresh();
+      this.target--;
       axios.post(server + "/target", {
-        value: this.target - 1,
+        value: this.target,
         persistent: false
       });
-      this.refresh();
+      // this.refresh();
     }
   }
 };
 </script>
 
-<style lang="scss">
-/*
-html,
-body {
-  height: 100%;
-  width: 100%;
-  margin: 0px;
+<style lang="scss" scoped>
+@import "./styles/colors.css";
+footer {
+  height: 25vh;
+  background-color: #fafafa;
+  padding: 5vh 5vw 2.5vh;
 }
-#app {
-  font-family: Arial, Helvetica, sans-serif;
-  background-color: #445963;
-  min-height: 100%;
-  display: grid;
-  grid-template-rows: 40px 1fr 40px;
-  grid-template-columns: 1fr 1fr 1fr;
-  header {
-    grid-row: 1;
-    grid-column: 1 / span 3;
-    display: grid;
-    grid-template: subgrid;
-    grid-auto-flow: column;
-    background-color: #1b3039;
-    color: white;
-    div {
-      justify-self: center;
-      align-self: center;
-      grid-column: auto;
-      padding: 0px;
-    }
-  }
-  main {
-    grid-row: 2;
-    display: grid;
-    grid-column: 1 / span 3;
-    grid-template: subgrid;
-    grid-auto-flow: column;
-    height: 400px;
-    div {
-      justify-self: center;
-      align-self: center;
-    }
-    .target {
-      grid-column: 1;
-      div {
-        display: block;
-        text-align: center;
-        button {
-          display: inline-block;
-          background-color: #005ecb;
-          border: none;
-          color: white;
-          padding: 5px;
-          margin: 25px 0px;
-          font-size: 20pt;
-          box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.4);
-          border-radius: 50%;
-          width: 60px;
-          height: 60px;
-        }
-        button:active {
-          box-shadow: none;
-        }
-        button:focus {
-          outline: 0;
-        }
-      }
-      p {
-        display: block;
-        font-size: 72pt;
-        margin: 0px;
-      }
-    }
-    .average {
-      grid-column: 2;
-      font-size: 128pt;
-      p {
-        margin: 50px 0px;
-      }
-    }
-    .controls {
-      grid-column: 3;
-      div {
-        display: block;
-        text-align: center;
-        button {
-          display: inline-block;
-          background-color: #005ecb;
-          border: none;
-          color: white;
-          padding: 5px 15px;
-          margin: 50px 0px;
-          font-size: 20pt;
-          box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.4);
-          border-radius: 4px;
-        }
-      }
-    }
-  }
-  footer {
-    background-color: #708690;
-    grid-row: 3;
-    grid-column: 1 / span 3;
-    display: grid;
-    grid-template: subgrid;
-    grid-auto-flow: column;
-    div {
-      justify-self: center;
-      align-self: center;
-      grid-column: auto;
-      padding: 0px;
-    }
-  }
+.level-item {
+  height: 15vh;
+  border-radius: 5px;
 }
-*/
+.center {
+  margin: 10vh 0;
+  text-align: center;
+}
+.box {
+  height: 35vh;
+}
 </style>

@@ -1,14 +1,14 @@
 import Vue from "vue";
-import axios from "axios";
-import VueAxios from "vue-axios";
-import Vuetify from "vuetify";
-import App from "./App.vue";
 import VueMoment from "vue-moment";
+import Buefy from "buefy";
+import "buefy/dist/buefy.css";
 
-import "vuetify/dist/vuetify.min.css";
+import App from "./App.vue";
 
-Vue.use(VueAxios, axios);
-Vue.use(Vuetify);
+Vue.use(Buefy, {
+  defaultIconPack: "fas"
+});
+
 Vue.use(VueMoment);
 
 Vue.config.productionTip = false;
