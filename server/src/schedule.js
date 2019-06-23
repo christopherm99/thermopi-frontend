@@ -28,7 +28,7 @@ function get(time) {
 }
 
 function __get(time) {
-  return timetable[time.weekday][time.hour];
+  return timetable[time.weekday - 1][time.hour];
 }
 
 function set(app, val, persistent, time) {

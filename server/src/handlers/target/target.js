@@ -3,7 +3,7 @@ const { setTarget } = require("../../schedule");
 module.exports = {
   get(req, res) {
     res.app.locals.target
-      ? res.send(res.app.locals.target)
+      ? res.send({ value: res.app.locals.target })
       : res.status(503).send("Service Unavailable: Target Unset");
   },
   post(req, res) {

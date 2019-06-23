@@ -22,6 +22,7 @@ module.exports = (tokens, req, res) => {
   /* eslint-enable */
   return [
     chalk.bold(status),
+    req.ip,
     chalk.dim(tokens.url(req, res)),
     tokens["response-time"](req, res),
     "ms"
