@@ -1,7 +1,7 @@
 <template>
   <footer>
     <h2 class="subtitle">Sensor Readings</h2>
-    <nav class="level">
+    <div class="level">
       <p
         class="level-item box has-text-centered has-text-black-ter is-size-4"
         :class="`has-background-${sensor.name}`"
@@ -10,16 +10,16 @@
       >
         {{ sensor.value }} °F
       </p>
-    </nav>
+    </div>
   </footer>
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
   name: "sensors",
-  props: {
-    sensors: Array
-  }
+  computed: mapState(["sensors"])
 };
 </script>
 
@@ -27,8 +27,11 @@ export default {
 @import "../styles/colors.css";
 
 footer {
-  height: 25vh;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 35vh;
   background-color: #fafafa;
-  padding: 5vh 5vw 2.5vh;
+  padding: 3vh 5vw 2.5vh;
 }
 </style>
