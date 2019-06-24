@@ -30,8 +30,8 @@ footer {
   position: absolute;
   bottom: 0;
   width: 100%;
-  height: 35vh;
+  height: 37.5vh;
   background-color: #fafafa;
-  padding: 3vh 5vw 2.5vh;
+  padding: 5vh 5vw 2.5vh;
 }
 </style>

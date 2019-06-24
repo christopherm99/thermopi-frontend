@@ -4,7 +4,7 @@ import Buefy from "buefy";
 import "buefy/dist/buefy.css";
 
 import App from "./App.vue";
-import store from "./store";
+import store from "./store/index";
 
 Vue.use(Buefy, {
   defaultIconPack: "fas"
