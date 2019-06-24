@@ -17,6 +17,7 @@ app.use(express.static("public"));
 // Config
 app.locals = config(require("../config.json"));
 initTimetableJob(app);
+app.locals.hold = false;
 app.locals.sensors = {};
 // Handlers
 app.get("/target", handlers.target.get);
@@ -24,6 +25,8 @@ app.post("/target", handlers.target.post);
 app.get("/sensors", handlers.sensors.get);
 app.get("/sensors/:id", handlers.sensors.get);
 app.post("/sensors/:id", handlers.sensors.postID);
+app.get("/settings/hold", handlers.settings.hold.getHold);
+app.post("/settings/hold", handlers.settings.hold.setHold);
 
 app.listen(app.locals.port, () =>
   // eslint-disable-next-line no-console

@@ -83,7 +83,9 @@ module.exports = {
     sync();
     __setTarget(app, get());
     return scheduleJob("0 * * * *", () => {
-      __setTarget(app, get());
+      if (!app.locals.hold) {
+        __setTarget(app, get());
+      }
     });
   },
   getTarget: get,

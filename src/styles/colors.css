@@ -1,83 +1,83 @@
 
 .has-background-red {
-  background-color: #ef5350;
+  background-color: #ef5350 !important;
 }
 
 .has-background-pink {
-  background-color: #ec407a;
+  background-color: #ec407a !important;
 }
 
 .has-background-purple {
-  background-color: #ab47bc;
+  background-color: #ab47bc !important;
 }
 
 .has-background-deep-purple {
-  background-color: #7e57c2;
+  background-color: #7e57c2 !important;
 }
 
 .has-background-indigo {
-  background-color: #5c6bc0;
+  background-color: #5c6bc0 !important;
 }
 
 .has-background-blue {
-  background-color: #42a5f5;
+  background-color: #42a5f5 !important;
 }
 
 .has-background-light-blue {
-  background-color: #29b6f6;
+  background-color: #29b6f6 !important;
 }
 
 .has-background-cyan {
-  background-color: #26c6da;
+  background-color: #26c6da !important;
 }
 
 .has-background-teal {
-  background-color: #26a69a;
+  background-color: #26a69a !important;
 }
 
 .has-background-green {
-  background-color: #66bb6a;
+  background-color: #66bb6a !important;
 }
 
 .has-background-light-green {
-  background-color: #9ccc65;
+  background-color: #9ccc65 !important;
 }
 
 .has-background-lime {
-  background-color: #d4e157;
+  background-color: #d4e157 !important;
 }
 
 .has-background-yellow {
-  background-color: #ffee58;
+  background-color: #ffee58 !important;
 }
 .has-background-amber {
-  background-color: #ffca28;
+  background-color: #ffca28 !important;
 }
 
 .has-background-orange {
-  background-color: #ffa726;
+  background-color: #ffa726 !important;
 }
 
 .has-background-deep-orange {
-  background-color: #ff7043;
+  background-color: #ff7043 !important;
 }
 
 .has-background-brown {
-  background-color: #8d6e63;
+  background-color: #8d6e63 !important;
 }
 
 .has-background-grey {
-  background-color: #bdbdbd;
+  background-color: #bdbdbd !important;
 }
 
 .has-background-blue-grey {
-  background-color: #78909c;
+  background-color: #78909c !important;
 }
 
 .has-background-black {
-  background-color: #000000;
+  background-color: #000000 !important;
 }
 
 .has-background-white {
-  background-color: #ffffff;
+  background-color: #ffffff !important;
 }
