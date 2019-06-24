@@ -29,7 +29,7 @@ export default {
     };
   },
   mounted() {
-    // Ensures time is always current, by constantly updating
+    // Ensures time is always current by constantly updating
     setInterval(this.refresh, 30000);
   },
   methods: {

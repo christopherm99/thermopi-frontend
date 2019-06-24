@@ -18,7 +18,7 @@ import { mapGetters } from "vuex";
 
 export default {
   name: "average",
-  computed: mapGetters(["average"])
+  computed: mapGetters(["average"]) // Imports average getter from Vuex
 };
 </script>
 

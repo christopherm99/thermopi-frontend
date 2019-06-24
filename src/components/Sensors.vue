@@ -4,9 +4,11 @@
     <div class="level">
       <p
         class="level-item box has-text-centered has-text-black-ter is-size-4"
-        :class="`has-background-${sensor.name}`"
+        :class="
+          `has-background-${sensor.name}` // Automatically loads color from styles/colors.css by sensor name
+        "
         v-for="sensor in sensors"
-        v-bind:key="sensor.name"
+        :key="sensor.name"
       >
         {{ sensor.value }} °F
       </p>
@@ -19,7 +21,7 @@ import { mapState } from "vuex";
 
 export default {
   name: "sensors",
-  computed: mapState(["sensors"])
+  computed: mapState(["sensors"]) // Imports sensors variable from Vuex
 };
 </script>
 

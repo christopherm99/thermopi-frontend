@@ -20,12 +20,13 @@ export default {
     Columns,
     Sensors
   },
+  methods: {
+    ...mapActions(["refresh"]) // Imports refresh action from Vuex
+  },
+  // Sets up autorefresh
   mounted() {
     this.refresh();
     setInterval(this.refresh, 5000);
-  },
-  methods: {
-    ...mapActions(["refresh"])
   }
 };
 </script>

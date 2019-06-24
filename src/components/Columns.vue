@@ -1,5 +1,5 @@
 <template>
-  <div class="columns" style="margin: 10px;">
+  <div class="columns">
     <target class="column" />
     <average class="column" />
     <settings class="column" />
@@ -20,3 +20,9 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.columns {
+  margin: 10px;
+}
+</style>

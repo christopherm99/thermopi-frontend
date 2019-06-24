@@ -7,10 +7,13 @@
       <div id="content">
         <b-button
           class="is-size-6"
-          :type="hold ? 'is-primary' : ''"
+          :type="
+            hold ? 'is-primary' : '' // Toggles color based on temp hold status (ternary operator)
+          "
           @click="toggleHold"
           >Hold</b-button
         >
+        <!-- Adds slight spacing between buttons -->
         &nbsp;
         <b-button class="is-size-6">Set</b-button>
       </div>
@@ -23,9 +26,9 @@ import { mapActions, mapState } from "vuex";
 
 export default {
   name: "settings",
-  computed: mapState(["hold"]),
+  computed: mapState(["hold"]), // Imports hold variable from Vuex
   methods: {
-    ...mapActions(["toggleHold"])
+    ...mapActions(["toggleHold"]) // Imports toggleHold action from Vuex
   }
 };
 </script>

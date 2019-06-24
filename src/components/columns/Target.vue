@@ -28,12 +28,12 @@ import { mapActions, mapState } from "vuex";
 
 export default {
   name: "target",
-  computed: mapState(["target"]),
+  computed: mapState(["target"]), // Imports target variable from Vuex
   methods: {
     ...mapActions({
       increment: "incrementTarget",
       decrement: "decrementTarget"
-    })
+    }) // Imports increment and decrement actions from Vuex
   }
 };
 </script>

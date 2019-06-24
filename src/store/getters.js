@@ -1,4 +1,5 @@
 export default {
+  // Calculates average temperature from sensor list
   average(state) {
     let tot = 0;
     for (let i = 0; i < state.sensors.length; i++) {
