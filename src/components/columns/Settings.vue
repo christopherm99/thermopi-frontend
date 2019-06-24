@@ -7,9 +7,7 @@
       <div id="content">
         <b-button
           class="is-size-6"
-          :type="
-            hold ? 'is-primary' : ''
-          "
+          :type="hold ? 'is-primary' : ''"
           @click="toggleHold"
           >Hold</b-button
         >
