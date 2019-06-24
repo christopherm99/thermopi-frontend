@@ -8,7 +8,7 @@
         <b-button
           class="is-size-6"
           :type="
-            hold ? 'is-primary' : '' // Toggles color based on temp hold status (ternary operator)
+            hold ? 'is-primary' : ''
           "
           @click="toggleHold"
           >Hold</b-button

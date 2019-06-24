@@ -4,9 +4,7 @@
     <div class="level">
       <p
         class="level-item box has-text-centered has-text-black-ter is-size-4"
-        :class="
-          `has-background-${sensor.name}` // Automatically loads color from styles/colors.css by sensor name
-        "
+        :class="`has-background-${sensor.name}`"
         v-for="sensor in sensors"
         :key="sensor.name"
       >
