@@ -9,22 +9,28 @@ const handlers = require("./handlers/index");
 const { initTimetableJob } = require("./schedule");
 
 const app = express();
+
 // Middleware
-app.use(morgan(morganFormat));
-app.use(cors());
-app.use(bodyParser.json());
-app.use(express.static("public"));
+app.use(morgan(morganFormat)); // Logs
+app.use(cors()); // Allows CORS
+app.use(bodyParser.json()); // Auto-parses JSON
+app.use(express.static("public")); // Serves static Vue webserver
+
 // Config
-app.locals = config(require("../config.json"));
-initTimetableJob(app);
-app.locals.hold = false;
-app.locals.sensors = {};
+app.locals = config(require("../config.json")); // Imports from config file
+initTimetableJob(app); // Starts reading from timetable.json
+app.locals.hold = false; // Sets default temp hold status
+app.locals.sensors = {}; // Initializes sensors
+
 // Handlers
+// target
 app.get("/target", handlers.target.get);
 app.post("/target", handlers.target.post);
+// sensors
 app.get("/sensors", handlers.sensors.get);
 app.get("/sensors/:id", handlers.sensors.get);
 app.post("/sensors/:id", handlers.sensors.postID);
+// settings
 app.get("/settings/hold", handlers.settings.hold.getHold);
 app.post("/settings/hold", handlers.settings.hold.setHold);
 
