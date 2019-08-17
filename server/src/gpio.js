@@ -35,7 +35,7 @@ module.exports = {
     getAverageTemperature() > app.locals.target
       ? setFan(Gpio.HIGH)
       : setFan(Gpio.LOW);
-    scheduleJob("0/10 * * * *", () => {
+    scheduleJob("* * * * *", () => {
       getAverageTemperature() > app.locals.target
         ? setFan(Gpio.HIGH)
         : setFan(Gpio.LOW);
