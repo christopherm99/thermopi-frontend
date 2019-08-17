@@ -1,5 +1,5 @@
 const { Gpio } = require("onoff");
-const { scheduleJob } = require("node-schedule");
+// const { scheduleJob } = require("node-schedule");
 const { getAverageTemperature } = require("./temperature");
 let fanIO;
 let compressorIO;
@@ -35,11 +35,16 @@ module.exports = {
     getAverageTemperature() > app.locals.target
       ? setFan(Gpio.HIGH)
       : setFan(Gpio.LOW);
-    scheduleJob("* * * * *", () => {
+    setInterval(() => {
       getAverageTemperature() > app.locals.target
         ? setFan(Gpio.HIGH)
         : setFan(Gpio.LOW);
-    });
+    }, 1000);
+    // scheduleJob("* * * * *", () => {
+    //   getAverageTemperature() > app.locals.target
+    //     ? setFan(Gpio.HIGH)
+    //     : setFan(Gpio.LOW);
+    // });
   },
   getFan,
   getCompressor,
