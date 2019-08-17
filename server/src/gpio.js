@@ -30,11 +30,11 @@ module.exports = {
     compressorIO = new Gpio(app.locals.compPin, "out");
   },
   initACJob(app) {
-    getAverageTemperature() > app.locals.target
+    getAverageTemperature(app) > app.locals.target
       ? setFan(Gpio.HIGH)
       : setFan(Gpio.LOW);
     scheduleJob("0/10 * * * *", () => {
-      getAverageTemperature() > app.locals.target
+      getAverageTemperature(app) > app.locals.target
         ? setFan(Gpio.HIGH)
         : setFan(Gpio.LOW);
     });
