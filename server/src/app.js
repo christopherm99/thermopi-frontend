@@ -7,6 +7,7 @@ const config = require("./config");
 const morganFormat = require("./morgan");
 const handlers = require("./handlers/index");
 const { initTimetableJob } = require("./schedule");
+const { initGpio, initACJob } = require("./gpio");
 
 const app = express();
 
@@ -19,6 +20,8 @@ app.use(express.static("public")); // Serves static Vue webserver
 // Config
 app.locals = config(require("../config.json")); // Imports from config file
 initTimetableJob(app); // Starts reading from timetable.json
+initGpio(app); // Opens GPIO pins
+initACJob(app); // Starts setting AC on and off
 app.locals.hold = false; // Sets default temp hold status
 app.locals.sensors = {}; // Initializes sensors
 
