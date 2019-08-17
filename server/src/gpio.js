@@ -13,12 +13,14 @@ function getCompressor() {
 }
 
 function setFan(state) {
+  console.log(`Setting fan ${state}`);
   if (state !== getFan()) {
     fanIO.writeSync(state);
   }
 }
 
 function setCompressor(state) {
+  console.log(`Setting fan ${state}`);
   if (state !== getCompressor()) {
     compressorIO.writeSync(state);
   }
