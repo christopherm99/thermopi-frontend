@@ -9,10 +9,14 @@ function set(app, val, id) {
 }
 
 function getAvg(app) {
-  let temps = Object.values(app.locals.sensors);
-  let sum = 0;
-  temps.forEach(t => (sum += t));
-  return sum / temps.length;
+  if (app.locals.sensors) {
+    let temps = Object.values(app.locals.sensors);
+    let sum = 0;
+    temps.forEach(t => (sum += t));
+    return sum / temps.length;
+  } else {
+    return app.locals.target;
+  }
 }
 
 function __getAll(app) {
