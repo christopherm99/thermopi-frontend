@@ -24,33 +24,34 @@ function setCompressor(state) {
   }
 }
 
+function off() {
+  setFan(Gpio.LOW);
+  setCompressor(Gpio.LOW);
+}
+
+function ac() {
+  setFan(Gpio.HIGH);
+  setCompressor(Gpio.HIGH);
+}
+
 module.exports = {
   initGpio(app) {
     fanIO = new Gpio(app.locals.fanPin, "out");
     compressorIO = new Gpio(app.locals.compPin, "out");
   },
   initACJob(app) {
-    getAverageTemperature(app) > app.locals.target
-      ? setFan(Gpio.HIGH)
-      : setFan(Gpio.LOW);
+    getAverageTemperature(app) > app.locals.target ? ac : off;
     scheduleJob("0/10 * * * *", () => {
-      getAverageTemperature(app) > app.locals.target
-        ? setFan(Gpio.HIGH)
-        : setFan(Gpio.LOW);
+      // Runs every 10 minutes
+      getAverageTemperature(app) > app.locals.target ? ac : off;
     });
   },
   getFan,
   getCompressor,
-  off() {
-    setFan(Gpio.LOW);
-    setCompressor(Gpio.LOW);
-  },
+  off,
   fan() {
     setFan(Gpio.HIGH);
     setCompressor(Gpio.LOW);
   },
-  ac() {
-    setFan(Gpio.HIGH);
-    setCompressor(Gpio.HIGH);
-  }
+  ac
 };
