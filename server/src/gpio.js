@@ -1,5 +1,4 @@
 const { Gpio } = require("onoff");
-const { scheduleJob } = require("node-schedule");
 const { getAverageTemperature } = require("./temperature");
 let fanIO;
 let compressorIO;
@@ -42,16 +41,14 @@ module.exports = {
   initACJob(app) {
     getAverageTemperature(app) > app.locals.target ? ac() : off();
     if (app.locals.test) {
-      console.log("Test mode on");
+      // Test mode (checks AC every second)
       setInterval(() => {
-        console.log("AC JOB CHECK");
         getAverageTemperature(app) > app.locals.target ? ac() : off();
       }, 1000);
     } else {
-      scheduleJob("0/10 * * * *", () => {
-        // Runs every 10 minutes
+      setInterval(() => {
         getAverageTemperature(app) > app.locals.target ? ac() : off();
-      });
+      }, 1000 * 60 * 10);
     }
   },
   getFan,
