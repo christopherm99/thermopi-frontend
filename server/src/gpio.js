@@ -39,7 +39,7 @@ module.exports = {
     compressorIO = new Gpio(app.locals.compPin, "out");
   },
   initACJob(app) {
-    getAverageTemperature(app) > app.locals.target ? ac() : off();
+    off();
     if (app.locals.test) {
       // Test mode (checks AC every second)
       setInterval(() => {
