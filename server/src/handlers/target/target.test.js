@@ -9,7 +9,7 @@ describe("GET /target", () => {
     let req = mockRequest(locals);
     let res = mockResponse(locals);
     target.get(req, res);
-    expect(res.send).toBeCalledWith(locals.target);
+    expect(res.send).toBeCalledWith({ value: locals.target });
   });
 
   it("Should respond with 500 (target unset)", () => {

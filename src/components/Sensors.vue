@@ -3,7 +3,7 @@
     <h2 class="subtitle">Sensor Readings</h2>
     <div class="level">
       <p
-        class="level-item box has-text-centered has-text-black-ter is-size-4"
+        class="level-item box has-text-centered has-text-white is-size-4 sensor"
         :class="`has-background-${sensor.name}`"
         v-for="sensor in sensors"
         :key="sensor.name"
@@ -33,5 +33,9 @@ footer {
   height: 37.5vh;
   background-color: #fafafa;
   padding: 5vh 5vw 2.5vh;
+}
+
+.sensor {
+  margin: 0 1vw 0 1vw;
 }
 </style>

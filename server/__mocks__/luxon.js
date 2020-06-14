@@ -2,7 +2,7 @@ module.exports = {
   DateTime: {
     local() {
       return {
-        weekday: 0,
+        weekday: 1,
         hour: 0
       };
     }

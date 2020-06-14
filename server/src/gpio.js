@@ -1,5 +1,4 @@
 const { Gpio } = require("onoff");
-// const { scheduleJob } = require("node-schedule");
 const { getAverageTemperature } = require("./temperature");
 let fanIO;
 let compressorIO;
@@ -13,17 +12,25 @@ function getCompressor() {
 }
 
 function setFan(state) {
-  console.log(`Setting fan ${state}`);
   if (state !== getFan()) {
     fanIO.writeSync(state);
   }
 }
 
 function setCompressor(state) {
-  console.log(`Setting fan ${state}`);
   if (state !== getCompressor()) {
     compressorIO.writeSync(state);
   }
+}
+
+function off() {
+  setFan(Gpio.HIGH);
+  setCompressor(Gpio.HIGH);
+}
+
+function ac() {
+  setFan(Gpio.LOW);
+  setCompressor(Gpio.LOW);
 }
 
 module.exports = {
@@ -32,32 +39,24 @@ module.exports = {
     compressorIO = new Gpio(app.locals.compPin, "out");
   },
   initACJob(app) {
-    getAverageTemperature(app) > app.locals.target
-      ? setFan(Gpio.HIGH)
-      : setFan(Gpio.LOW);
-    setInterval(() => {
-      getAverageTemperature(app) > app.locals.target
-        ? setFan(Gpio.HIGH)
-        : setFan(Gpio.LOW);
-    }, 1000);
-    // scheduleJob("* * * * *", () => {
-    //   getAverageTemperature() > app.locals.target
-    //     ? setFan(Gpio.HIGH)
-    //     : setFan(Gpio.LOW);
-    // });
+    off();
+    if (app.locals.test) {
+      // Test mode (checks AC every second)
+      setInterval(() => {
+        getAverageTemperature(app) > app.locals.target ? ac() : off();
+      }, 1000);
+    } else {
+      setInterval(() => {
+        getAverageTemperature(app) > app.locals.target ? ac() : off();
+      }, 1000 * 60 * 10);
+    }
   },
   getFan,
   getCompressor,
-  off() {
-    setFan(Gpio.LOW);
-    setCompressor(Gpio.LOW);
-  },
+  off,
   fan() {
     setFan(Gpio.HIGH);
     setCompressor(Gpio.LOW);
   },
-  ac() {
-    setFan(Gpio.HIGH);
-    setCompressor(Gpio.HIGH);
-  }
+  ac
 };

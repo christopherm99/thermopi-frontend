@@ -9,7 +9,7 @@ const schedule = require("./schedule");
 
 describe("getTarget", () => {
   let time = {
-    weekday: 0,
+    weekday: 1,
     hour: 0
   };
   let now = DateTime.local();
@@ -20,7 +20,7 @@ describe("getTarget", () => {
   });
 
   it("Should return the current target", () => {
-    expect(schedule.getTarget()).toBe(timetable[now.weekday][now.hour]);
+    expect(schedule.getTarget()).toBe(timetable[now.weekday - 1][now.hour]);
   });
 
   it("Should reject if weekday is not a number", () => {
@@ -30,7 +30,7 @@ describe("getTarget", () => {
   });
 
   it("Should reject if hour is not a number", () => {
-    expect(() => schedule.getTarget({ weekday: 0, hour: "NaN" })).toThrow(
+    expect(() => schedule.getTarget({ weekday: 1, hour: "NaN" })).toThrow(
       new TypeError("hour type string")
     );
   });
@@ -38,7 +38,7 @@ describe("getTarget", () => {
 
 describe("setTarget", () => {
   let time = {
-    weekday: 0,
+    weekday: 1,
     hour: 0
   };
   let app = mockApp({ target: 0 });
@@ -92,7 +92,7 @@ describe("initTimetableJob", () => {
     let timetable = jsonfile.readFileSync();
     schedule.initTimetableJob(app);
     expect(app.locals.target).toBe(
-      timetable[DateTime.local().weekday][DateTime.local().hour]
+      timetable[DateTime.local().weekday - 1][DateTime.local().hour]
     );
   });
 

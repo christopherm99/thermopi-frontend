@@ -1,6 +1,6 @@
 # thermopi
 
-[![Build status](https://img.shields.io/travis/christopherm99/thermopi.svg?style=for-the-badge)](https://travis-ci.org/christopherm99/thermopi)
+[![Build status](https://img.shields.io/travis/christopherm99/thermopi/master.svg?style=for-the-badge)](https://travis-ci.org/christopherm99/thermopi)
 [![Coverage status](https://img.shields.io/coveralls/github/christopherm99/thermopi.svg?style=for-the-badge)](https://coveralls.io/github/christopherm99/thermopi)
 [![Vulnerabilities](https://img.shields.io/snyk/vulnerabilities/github/christopherm99/thermopi.svg?style=for-the-badge)](https://github.com/christopherm99/thermopi/network/alerts)
 [![Dependency status](https://img.shields.io/david/christopherm99/thermopi.svg?style=for-the-badge)](https://github.com/christopherm99/thermopi/network/dependencies)

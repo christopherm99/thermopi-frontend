@@ -9,7 +9,7 @@ import {
   UPDATE_TARGET
 } from "./mutation-types";
 
-const server = "http://192.168.1.17:8080";
+const server = "http://localhost:8080";
 
 export default {
   // Refreshes sensor list, temp hold status, and target temperature from server
