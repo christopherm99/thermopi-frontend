@@ -24,13 +24,13 @@ function setCompressor(state) {
 }
 
 function off() {
-  setFan(Gpio.HIGH);
-  setCompressor(Gpio.HIGH);
+  setFan(Gpio.LOW);
+  setCompressor(Gpio.LOW);
 }
 
 function ac() {
-  setFan(Gpio.LOW);
-  setCompressor(Gpio.LOW);
+  setFan(Gpio.HIGH);
+  setCompressor(Gpio.HIGH);
 }
 
 module.exports = {
